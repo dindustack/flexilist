@@ -8,6 +8,7 @@ export const Footer = () => {
         bottom-0   
         w-full
         border-t 
+        bg-white
         border-t-black
         flex 
         items-center 

@@ -4,12 +4,13 @@ import { TodoContent } from "./Todo/Content";
 
 export const Container = () => {
   return (
-    <>
+    <div>
       <Navbar />
-      <main className="pt-40 pb-20 px-4 md:px-24">
+      <div className="flex-grow-[1] pt-20 pb-20">
         <TodoContent />
-      </main>
+      </div>
+      
       <Footer />
-    </>
+    </div>
   );
 };

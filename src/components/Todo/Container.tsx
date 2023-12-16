@@ -3,5 +3,5 @@ type IContainer = {
 };
 
 export const TodoContainer = ({ children }: IContainer) => {
-  return <>{children}</>;
+  return <div className="overflow-hidden mb-24  ">{children}</div>;
 };
