@@ -1,26 +1,8 @@
-import { signal } from "@preact/signals-react";
 import { Section } from "../../types";
 import { PlusIcon } from "../../assets/icons/PlusIcon";
 import React from "react";
 import { sections } from "./utils";
-import { Button } from "../Button";
-
-// const LOCAL_STORAGE_KEY = "TODOS";
-
-// Initialize todos
-// const todos = signal(getTodos());
-// const newTodoName = signal("");
-
-// Fetch todos from local storage
-// function getTodos() {
-//   const value = localStorage.getItem(LOCAL_STORAGE_KEY);
-//   if (value == null) return [];
-//   return JSON.parse(value);
-// }
-
-// effect(() => {
-//   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos.value));
-// });
+import { TodoSection } from "./Section";
 
 console.log("sections", sections);
 
@@ -34,16 +16,6 @@ function createNewSection() {
 }
 
 export function TodoBoard() {
-  // function addTodo() {
-  //   todos.value = [
-  //     ...todos.value,
-  //     { id: crypto.randomUUID(), name: newTodoName.value },
-  //   ];
-  //   newTodoName.value = ""; // Reset input value on add
-  // }
-
-  // const onInput = (event: React.FormEvent<HTMLInputElement>) =>
-  //   (newTodoName.value = event.target.value);
   return (
     // <div className="">
     //   <div className="flex flex-col">
@@ -65,14 +37,13 @@ export function TodoBoard() {
     //     </ul>
     //   </div>
     // </div>
-    <div className="flex flex-row">
-      {React.Children.toArray(
-        sections.value.map((section) => <div>{section.title}</div>)
-      )}
-      {/* <Button onClick={createNewSection} rounded hover shadow outline border>
-        <PlusIcon />
-        New Board
-      </Button> */}
+    <div className="flex gap-4">
+      <div className="flex gap-4">
+        {React.Children.toArray(
+          sections.value.map((section) => <TodoSection title={section.title} />)
+        )}
+      </div>
+
       <button
         role="button"
         aria-label="Click to perform an action"
@@ -101,4 +72,4 @@ export function TodoBoard() {
       </button>
     </div>
   );
-};
+}
