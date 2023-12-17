@@ -1,7 +1,23 @@
-type IContainer = {
-  children: React.ReactNode;
-};
+import { TodoBoard } from "./Board";
 
-export const TodoContainer = ({ children }: IContainer) => {
-  return <div className="overflow-hidden mb-24  ">{children}</div>;
+export const TodoContainer = () => {
+  return (
+    <div className="overflow-hidden mb-24">
+      <div
+        className="
+          w-full 
+          min-h-screen 
+          flex 
+          pt-16
+          overflow-x-auto
+          overflow-y-hidden
+          px-[2.5rem]
+          "
+      >
+        <div className="flex gap-4">
+          <TodoBoard />
+        </div>
+      </div>
+    </div>
+  );
 };

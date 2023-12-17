@@ -33,11 +33,11 @@ export function Button({
 
          ${rounded ? "rounded-full" : "rounded-[1.875rem]"}
          ${outline ? "bg-white text-black" : "bg-black text-white"}
-         ${rounded ? "rounded-full" : "rounded-[1.875rem]"}
          ${shadow ? "shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" : "shadow-none"}
          ${border ? "border-2" : "border"}
          ${hover && "hover:translate-x-[3px] hover:translate-y-[3px]"}
-        rounded-full 
+        rounded-full
+        inline-block
         border-2 
         border-black 
         px-10

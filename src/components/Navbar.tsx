@@ -9,6 +9,7 @@ export const Navbar = () => {
         w-full 
         h-14
         border-b 
+        bg-white
         border-b-black
         flex 
         items-center 
