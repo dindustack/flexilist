@@ -79,6 +79,9 @@ export function TodoBoard() {
               deleteSection={deleteSection}
               updateSectionTitle={updateSectionTitle}
               createTask={createTask}
+              tasks={tasks.value.filter(
+                (task) => task.sectionId === activeSection.value?.id
+              )}
             />
           )}
         </DragOverlay>,
