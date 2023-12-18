@@ -1,11 +1,12 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import { SortableContext } from "@dnd-kit/sortable";
+import { computed } from "@preact/signals-react";
+import { DragOverlay } from "@dnd-kit/core";
 import { Id, Section } from "../../types";
 import { PlusIcon } from "../../assets/icons/PlusIcon";
 import { activeSection, sections } from "./utils";
 import { TodoSection } from "./Section";
-import { DragOverlay } from "@dnd-kit/core";
-import { createPortal } from "react-dom";
 
 function createNewSection() {
   const sectionToAdd: Section = {
@@ -24,10 +25,18 @@ function deleteSection(id: Id) {
   sections.value = filteredSections;
 }
 
+// Update sections title
+function updateSectionTitle(id: Id, title: string) {
+  const updatedSections = sections.value.map((section) => {
+    if (section.id !== id) return section;
+    return { ...section, title };
+  });
+  sections.value = updatedSections;
+}
+
 const sectionId = sections.value.map((section) => section.id);
 
 export function TodoBoard() {
- 
   return (
     <>
       <div className="flex gap-4">
@@ -35,7 +44,11 @@ export function TodoBoard() {
           <SortableContext items={sectionId}>
             {React.Children.toArray(
               sections.value.map((section) => (
-                <TodoSection section={section} deleteSection={deleteSection} />
+                <TodoSection
+                  section={section}
+                  deleteSection={deleteSection}
+                  updateSectionTitle={updateSectionTitle}
+                />
               ))
             )}
           </SortableContext>
@@ -77,6 +90,7 @@ export function TodoBoard() {
             <TodoSection
               section={activeSection.value}
               deleteSection={deleteSection}
+              updateSectionTitle={updateSectionTitle}
             />
           )}
         </DragOverlay>,

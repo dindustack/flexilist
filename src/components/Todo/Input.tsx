@@ -1,10 +1,13 @@
 type Props = {
   value: string;
   onInput: React.FormEventHandler<HTMLInputElement>;
+  onBlur: () => void;
+  onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
 };
 
-export default function Input({ value, onInput, placeholder }: Props) {
+export default function Input(props: Props) {
+  const { value, onInput, onBlur, onKeyDown, placeholder } = props;
   return (
     <input
       className="
@@ -12,19 +15,19 @@ export default function Input({ value, onInput, placeholder }: Props) {
         border-2 
         border-black 
         p-[10px] 
+        text-black
         font-bold 
-        shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
         outline-none 
-        transition-all 
-        focus:translate-x-[3px] 
-        focus:translate-y-[3px] 
-        focus:shadow-none"
+      "
+      autoFocus
       type="text"
       name="text"
       id="text"
       placeholder={placeholder}
       value={value}
+      onBlur={onBlur}
       onInput={onInput}
+      onKeyDown={onKeyDown}
       aria-label={placeholder}
     />
   );

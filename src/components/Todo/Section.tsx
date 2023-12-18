@@ -2,14 +2,36 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Delete } from "../../assets/icons/Delete";
 import { Section, Id } from "../../types";
+import { signal } from "@preact/signals-react";
+import Input from "./Input";
 
 type TodoSectionProps = {
   section: Section;
   deleteSection: (id: Id) => void;
+  updateSectionTitle: (id: Id, title: string) => void;
 };
 
+const editMode = signal<boolean>(false);
+
 export const TodoSection = (props: TodoSectionProps) => {
-  const { section, deleteSection } = props;
+  const { section, deleteSection, updateSectionTitle } = props;
+
+  const handleEditMode = () => {
+    editMode.value = true;
+  };
+
+  const falseEditMode = () => {
+    editMode.value = false;
+  };
+
+  const handleEnterClick = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter") return;
+    editMode.value = false;
+  };
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateSectionTitle(section.id, event.target.value);
+  };
 
   const {
     setNodeRef,
@@ -24,6 +46,7 @@ export const TodoSection = (props: TodoSectionProps) => {
       type: "Section",
       section,
     },
+    disabled: editMode.value,
   });
 
   const style = {
@@ -72,6 +95,7 @@ export const TodoSection = (props: TodoSectionProps) => {
       <div
         {...attributes}
         {...listeners}
+        onClick={handleEditMode}
         className="
           flex
           items-center
@@ -86,8 +110,23 @@ export const TodoSection = (props: TodoSectionProps) => {
           border-b-2
         "
       >
-        <span className="inline-block bg-[#514ffe] text-white rounded-lg px-4 py-2 text-lg">
-          {section.title}
+        <span
+          className={`inline-block ${
+            !editMode.value && `bg-[#514ffe]`
+          } text-white rounded-lg px-4 py-2 text-lg`}
+        >
+          {!editMode.value && section.title}
+          {editMode.value && (
+            <Input
+              value={section.title}
+              onInput={handleTitleChange}
+              placeholder="Type..."
+              onBlur={() => {
+                falseEditMode;
+              }}
+              onKeyDown={handleEnterClick}
+            />
+          )}
         </span>
         <button onClick={() => deleteSection(section.id)}>
           <Delete />

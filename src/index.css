@@ -5,6 +5,16 @@
 html,
 body,
 :root {
-  @apply bg-white text-black box-border h-full;
+  @apply bg-white text-black box-border h-full overflow-hidden;
+
 }
 
+::-webkit-scrollbar:horizontal {
+  height: 1rem;
+  width: 40px;
+  border: 2px solid black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-black;
+}
