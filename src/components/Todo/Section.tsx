@@ -9,7 +9,7 @@ export const TodoSection = ({ title }: TodoSectionProps) => {
     <div
       className="
         bg-white
-        [w-350px]
+        w-[350px]
         [h-500px]
         max-h-[500px]
         rounded-md 
