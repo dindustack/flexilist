@@ -6,9 +6,9 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { activeSection, sections } from "./utils";
 import { TodoBoard } from "./Board";
 import { arrayMove } from "@dnd-kit/sortable";
+import { activeSection, sections } from "../../Utils/sections";
 
 export const TodoContainer = () => {
   function onDragStart(event: DragStartEvent) {
@@ -66,7 +66,11 @@ export const TodoContainer = () => {
           px-[2.5rem]
           "
       >
-        <DndContext sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd}>
+        <DndContext
+          sensors={sensors}
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+        >
           <TodoBoard />
         </DndContext>
       </div>

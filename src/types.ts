@@ -4,3 +4,9 @@ export type Section = {
   id: Id;
   title: string;
 };
+
+export type Task = {
+  id: Id;
+  sectionId: Id;
+  content: string;
+};

@@ -1,52 +1,38 @@
+import { PlusIcon } from "../assets/icons/PlusIcon";
+
 type ButtonProps = {
   children: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  rounded?: boolean;
-  shadow?: boolean;
-  hover?: boolean;
-  border?: boolean;
-  outline?: boolean;
-  colored?: boolean;
 };
 
-export function Button({
-  children,
-  border,
-  hover,
-  outline,
-  onClick,
-  rounded,
-  colored,
-  shadow,
-}: ButtonProps) {
+export function Button(props: ButtonProps) {
+  const { children, onClick } = props;
   return (
     <button
       role="button"
       aria-label="Click to perform an action"
       onClick={onClick}
-      className={`
-        flex 
+      className="
+        flex  
+        h-[60px]
+        w-[345px]
+        min-w-[345px] 
         cursor-pointer 
         items-center 
-         ${colored && "!bg-[#e9affc]"}
-         
-
-         ${rounded ? "rounded-full" : "rounded-[1.875rem]"}
-         ${outline ? "bg-white text-black" : "bg-black text-white"}
-         ${shadow ? "shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" : "shadow-none"}
-         ${border ? "border-2" : "border"}
-         ${hover && "hover:translate-x-[3px] hover:translate-y-[3px]"}
-        rounded-full
-        inline-block
+        rounded-md 
         border-2 
         border-black 
-        px-10
+        bg-[#e9affc] 
+        px-10 
         py-3 
-        font-bold  
-        transition-all 
-        hover:shadow-none
-        `}
+        gap-2
+        font-bold 
+        shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        transition-all hover:translate-x-[3px] 
+        hover:translate-y-[3px] 
+        hover:shadow-none"
     >
+      <PlusIcon />
       {children}
     </button>
   );

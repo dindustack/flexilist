@@ -1,20 +1,26 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Delete } from "../../assets/icons/Delete";
-import { Section, Id } from "../../types";
+import { Section, Id, Task } from "../../types";
 import { signal } from "@preact/signals-react";
 import Input from "./Input";
+import { Button } from "../Button";
+import React from "react";
+import { TaskItem } from "./TaskItem";
 
 type TodoSectionProps = {
   section: Section;
   deleteSection: (id: Id) => void;
   updateSectionTitle: (id: Id, title: string) => void;
+  createTask: (sectionId: Id) => void;
+  tasks: Task[];
 };
 
 const editMode = signal<boolean>(false);
 
 export const TodoSection = (props: TodoSectionProps) => {
-  const { section, deleteSection, updateSectionTitle } = props;
+  const { section, deleteSection, updateSectionTitle, createTask, tasks } =
+    props;
 
   const handleEditMode = () => {
     editMode.value = true;
@@ -31,6 +37,10 @@ export const TodoSection = (props: TodoSectionProps) => {
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateSectionTitle(section.id, event.target.value);
+  };
+
+  const handleCreateTask = (id: Id) => {
+    createTask(id);
   };
 
   const {
@@ -67,8 +77,7 @@ export const TodoSection = (props: TodoSectionProps) => {
         rounded-md 
         border-dashed
         border-2
-        border-black
-       
+        border-black 
     "
       ></div>
     );
@@ -132,6 +141,29 @@ export const TodoSection = (props: TodoSectionProps) => {
           <Delete />
         </button>
       </div>
+      {/* Section Content */}
+      <div
+        className="
+          flex 
+          flex-grow 
+          flex-col 
+          gap-4 
+          p-2 
+          overflow-x-hidden 
+          overflow-y-auto
+          
+          "
+      >
+        {React.Children.toArray(tasks.map((task) => <TaskItem task={task} />))}
+      </div>
+      {/* Section footer */}
+      <Button
+        onClick={() => {
+          handleCreateTask(section.id);
+        }}
+      >
+        Add New Task
+      </Button>
     </div>
   );
 };

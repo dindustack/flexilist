@@ -1,5 +1,5 @@
 import { effect, signal } from "@preact/signals-react";
-import { Section } from "../../types";
+import { Section } from "../types";
 
 const LOCAL_STORAGE_KEY = "TODO_BOARD";
 

@@ -18,6 +18,7 @@ export default function Input(props: Props) {
         text-black
         font-bold 
         outline-none 
+        focus:border-[#514ffe]
       "
       autoFocus
       type="text"
