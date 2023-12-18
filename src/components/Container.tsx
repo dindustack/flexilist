@@ -6,8 +6,8 @@ export const Container = () => {
   return (
     <div>
       <Navbar />
-      <main className="pt-20 pb-20">
-        <TodoContainer  />
+      <main className="overflow-y-hidden  pt-20 pb-20">
+        <TodoContainer />
       </main>
 
       <Footer />

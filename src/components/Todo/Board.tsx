@@ -40,6 +40,7 @@ export function TodoBoard() {
           bg-[#e9affc] 
           px-10 
           py-3 
+          gap-2
           font-bold 
           shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
           transition-all hover:translate-x-[3px] 
