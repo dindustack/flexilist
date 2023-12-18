@@ -4,8 +4,7 @@ import React from "react";
 import { sections } from "./utils";
 import { TodoSection } from "./Section";
 
-console.log("sections", sections);
-
+// Initialize todos
 function createNewSection() {
   const sectionToAdd: Section = {
     id: crypto.randomUUID(),
@@ -17,26 +16,6 @@ function createNewSection() {
 
 export function TodoBoard() {
   return (
-    // <div className="">
-    //   <div className="flex flex-col">
-    //     <div className="mb-4">
-    //       <Input
-    //         placeholder="Enter task name"
-    //         value={newTodoName?.value}
-    //         onInput={onInput}
-    //       />
-    //       <Button onClick={addTodo}>Add Todo</Button>
-
-    //     </div>
-    //     <ul>
-    //       {React.Children.toArray(
-    //         todos.value.map((todo) => (
-    //           <li className="text-black">{todo.name}</li>
-    //         ))
-    //       )}
-    //     </ul>
-    //   </div>
-    // </div>
     <div className="flex gap-4">
       <div className="flex gap-4">
         {React.Children.toArray(
