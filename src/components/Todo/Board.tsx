@@ -4,7 +4,7 @@ import { Id, Section } from "../../types";
 import { PlusIcon } from "../../assets/icons/PlusIcon";
 import { activeSection, sections } from "./utils";
 import { TodoSection } from "./Section";
-import { DndContext, DragOverlay, DragStartEvent } from "@dnd-kit/core";
+import { DragOverlay } from "@dnd-kit/core";
 import { createPortal } from "react-dom";
 
 function createNewSection() {
@@ -22,22 +22,14 @@ function deleteSection(id: Id) {
     (section) => section.id !== id
   );
   sections.value = filteredSections;
-  console.log("active");
 }
 
 const sectionId = sections.value.map((section) => section.id);
 
 export function TodoBoard() {
-  function onDragStart(event: DragStartEvent) {
-    console.log("DragSatrt", event);
-    if (event.active.data.current?.type === "Section") {
-      activeSection.value = event.active.data.current.section;
-      console.log("yarn", event);
-      return;
-    }
-  }
+ 
   return (
-    <DndContext onDragStart={onDragStart}>
+    <>
       <div className="flex gap-4">
         <div className="flex gap-4">
           <SortableContext items={sectionId}>
@@ -90,6 +82,6 @@ export function TodoBoard() {
         </DragOverlay>,
         document.body
       )}
-    </DndContext>
+    </>
   );
 }
