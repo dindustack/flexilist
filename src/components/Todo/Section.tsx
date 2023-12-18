@@ -1,11 +1,15 @@
 import { Delete } from "../../assets/icons/Delete";
-import { Section } from "../../types";
+import { Section, Id } from "../../types";
 
 type TodoSectionProps = {
   title: Section["title"];
+  id: Id;
+  deleteSection: (id: Id) => void;
 };
 
-export const TodoSection = ({ title }: TodoSectionProps) => {
+export const TodoSection = (props: TodoSectionProps) => {
+  const { title, id, deleteSection } = props;
+
   return (
     <div
       className="
@@ -36,8 +40,9 @@ export const TodoSection = ({ title }: TodoSectionProps) => {
         <span className="inline-block bg-[#514ffe] text-white rounded-lg px-4 py-2 text-lg">
           {title}
         </span>
-        <Delete />
-
+        <button onClick={() => deleteSection(id)}>
+          <Delete />
+        </button>
       </div>
     </div>
   );

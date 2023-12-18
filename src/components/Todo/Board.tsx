@@ -1,4 +1,4 @@
-import { Section } from "../../types";
+import { Id, Section } from "../../types";
 import { PlusIcon } from "../../assets/icons/PlusIcon";
 import React from "react";
 import { sections } from "./utils";
@@ -14,12 +14,21 @@ function createNewSection() {
   sections.value = [...sections.value, sectionToAdd];
 }
 
+function deleteSection(id: Id) {
+  const filteredSections = sections.value.filter(
+    (section) => section.id !== id
+  );
+  sections.value = filteredSections;
+}
+
 export function TodoBoard() {
   return (
     <div className="flex gap-4">
       <div className="flex gap-4">
         {React.Children.toArray(
-          sections.value.map((section) => <TodoSection title={section.title} />)
+          sections.value.map((section) => (
+            <TodoSection id={section.id} title={section.title} deleteSection={deleteSection} />
+          ))
         )}
       </div>
 
