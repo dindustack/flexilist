@@ -1,20 +1,38 @@
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { Delete } from "../../assets/icons/Delete";
 import { Section, Id } from "../../types";
 
 type TodoSectionProps = {
-  title: Section["title"];
-  id: Id;
+  section: Section;
   deleteSection: (id: Id) => void;
 };
 
 export const TodoSection = (props: TodoSectionProps) => {
-  const { title, id, deleteSection } = props;
+  const { section, deleteSection } = props;
+
+  const { setNodeRef, attributes, listeners, transform, transition } =
+    useSortable({
+      id: section.id,
+      data: {
+        type: "Section",
+        section,
+      },
+    });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+  };
 
   return (
     <div
+      ref={setNodeRef}
+      style={style}
       className="
         w-[350px]
         [h-550px]
+        bg-white
         max-h-[550px]
         rounded-md 
         border-2 
@@ -24,6 +42,8 @@ export const TodoSection = (props: TodoSectionProps) => {
     >
       {/* Section Title */}
       <div
+        {...attributes}
+        {...listeners}
         className="
           flex
           items-center
@@ -38,9 +58,9 @@ export const TodoSection = (props: TodoSectionProps) => {
         "
       >
         <span className="inline-block bg-[#514ffe] text-white rounded-lg px-4 py-2 text-lg">
-          {title}
+          {section.title}
         </span>
-        <button onClick={() => deleteSection(id)}>
+        <button onClick={() => deleteSection(section.id)}>
           <Delete />
         </button>
       </div>

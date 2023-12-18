@@ -14,9 +14,7 @@ export const TodoContainer = () => {
           px-[2.5rem]
           "
       >
-        <div className="flex gap-4">
-          <TodoBoard />
-        </div>
+        <TodoBoard />
       </div>
     </div>
   );
