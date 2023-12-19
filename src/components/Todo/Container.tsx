@@ -11,12 +11,17 @@ import { TodoBoard } from "./Board";
 import { arrayMove } from "@dnd-kit/sortable";
 import { activeSection, sections } from "../../Utils/sections";
 import { activeTask, tasks } from "../../Utils/task";
-import { Drawer } from "../Drawer";
-import { Button } from "../Button";
-import { useState } from "react";
+
+/**
+ * TodoContainer component manages the drag-and-drop functionality
+ * for the Kanban board using @dnd-kit/core library.
+ */
 
 export const TodoContainer = () => {
-
+  /**
+   * Handles the start of a drag operation.
+   * @param {DragStartEvent} event - The drag start event.
+   */
   function onDragStart(event: DragStartEvent) {
     if (event.active.data.current?.type === "Section") {
       activeSection.value = event.active.data.current.section;
@@ -29,6 +34,10 @@ export const TodoContainer = () => {
     }
   }
 
+  /**
+   * Handles the end of a drag operation.
+   * @param {DragEndEvent} event - The drag end event.
+   */
   function onDragEnd(event: DragEndEvent) {
     // When onDrayEnd ends remove dragOverlay component
     activeSection.value = null;
@@ -59,7 +68,10 @@ export const TodoContainer = () => {
 
     sections.value = draggedSection();
   }
-
+  /**
+   * Handles the drag-over event during a drag operation.
+   * @param {DragOverEvent} event - The drag over event.
+   */
   function onDragOver(event: DragOverEvent) {
     const { active, over } = event;
     if (!over) return;
@@ -75,6 +87,7 @@ export const TodoContainer = () => {
 
     if (!isActiveTask) return;
 
+    
     function draggedTask() {
       const activeIndex = tasks.value.findIndex(
         (task) => task.id === activeTaskId
@@ -137,7 +150,6 @@ export const TodoContainer = () => {
           <TodoBoard />
         </DndContext>
       </div>
-      
     </div>
   );
 };
