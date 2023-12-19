@@ -11,8 +11,12 @@ import { TodoBoard } from "./Board";
 import { arrayMove } from "@dnd-kit/sortable";
 import { activeSection, sections } from "../../Utils/sections";
 import { activeTask, tasks } from "../../Utils/task";
+import { Drawer } from "../Drawer";
+import { Button } from "../Button";
+import { useState } from "react";
 
 export const TodoContainer = () => {
+
   function onDragStart(event: DragStartEvent) {
     if (event.active.data.current?.type === "Section") {
       activeSection.value = event.active.data.current.section;
@@ -133,6 +137,7 @@ export const TodoContainer = () => {
           <TodoBoard />
         </DndContext>
       </div>
+      
     </div>
   );
 };

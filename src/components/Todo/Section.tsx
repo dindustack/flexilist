@@ -180,6 +180,7 @@ export const TodoSection = (props: TodoSectionProps) => {
       </div>
       {/* Section footer */}
       <Button
+        icon
         onClick={() => {
           handleCreateTask(section.id);
         }}

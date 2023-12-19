@@ -2,11 +2,12 @@ import { PlusIcon } from "../assets/icons/PlusIcon";
 
 type ButtonProps = {
   children: React.ReactNode;
+  icon?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export function Button(props: ButtonProps) {
-  const { children, onClick } = props;
+  const { children, onClick, icon } = props;
   return (
     <button
       role="button"
@@ -32,7 +33,7 @@ export function Button(props: ButtonProps) {
         hover:translate-y-[3px] 
         hover:shadow-none"
     >
-      <PlusIcon />
+      {icon && <PlusIcon />}
       {children}
     </button>
   );
