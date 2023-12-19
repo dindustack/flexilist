@@ -42,7 +42,7 @@ export default function DrawerContainer() {
                   <span className="inline-block font-bold text-[1.25rem]">
                     {section.title}
                   </span>
-                  <span className="inline-block px-4 py-2 text-[1rem] bg-black font-bold text-white rounded-[30px]">
+                  <span className="inline-block px-4 py-2 text-[1rem] bg-[#514ffe] font-bold text-white rounded-[30px]">
                     {getTaskLengthForSection(section.id)}
                   </span>
                 </div>
