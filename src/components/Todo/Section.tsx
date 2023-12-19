@@ -2,7 +2,6 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Delete } from "../../assets/icons/Delete";
 import { Section, Id, Task } from "../../types";
-import { signal } from "@preact/signals-react";
 import Input from "./Input";
 import { Button } from "../Button";
 import React, { useState } from "react";
@@ -57,7 +56,7 @@ export const TodoSection = (props: TodoSectionProps) => {
       type: "Section",
       section,
     },
-    disabled: editMode.value,
+    disabled: editMode,
   });
 
   const style = {

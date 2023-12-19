@@ -1,4 +1,3 @@
-import { signal } from "@preact/signals-react";
 import { Delete } from "../../assets/icons/Delete";
 import { Task } from "../../types";
 import { useState } from "react";
