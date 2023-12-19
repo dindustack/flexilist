@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import { Button } from "./Button";
-import { sections } from "../Utils/sections";
-import { Section } from "../types";
 
 type Props = {
   active: boolean;
@@ -45,7 +42,7 @@ export function Drawer({ active, setActive, children }: Props) {
         }}
         className="z-10 h-full w-[300px] border-2 border-black bg-white font-bold transition-transform duration-300"
       >
-       {children}
+        {children}
       </div>
     </div>
   );
