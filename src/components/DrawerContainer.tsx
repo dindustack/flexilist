@@ -27,7 +27,8 @@ export default function DrawerContainer() {
       </Button>
 
       <Drawer active={isDrawerActive} setActive={setIsDrawerActive}>
-        <div className="flex flex-col text-black">
+        <div className="flex flex-col text-black gap-4">
+          <h2 className="text-center pt-4 text-[1.5rem] text-bold">Summary</h2>
           {shouldDisplayMessage ? (
             <div className="pt-40 flex flex-col justify-center items-center">
               <p className="text-[1rem] text-bold">
