@@ -60,7 +60,8 @@ export const TodoContainer = () => {
           w-full 
           min-h-screen 
           flex 
-          pt-16
+          pt-8
+          md:pt-16
           overflow-x-auto
           overflow-y-hidden
           px-[2.5rem]
