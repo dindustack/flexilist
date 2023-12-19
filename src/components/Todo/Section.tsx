@@ -5,7 +5,7 @@ import { Section, Id, Task } from "../../types";
 import Input from "./Input";
 import { Button } from "../Button";
 import React, { useState } from "react";
-import { TaskItem } from "./TaskItem";
+import { TodoTaskItem } from "./TaskItem";
 
 type TodoSectionProps = {
   section: Section;
@@ -14,6 +14,7 @@ type TodoSectionProps = {
 
   createTask: (sectionId: Id) => void;
   deleteTask: (id: Id) => void;
+  updateTask: (id: Id, content: string) => void;
   tasks: Task[];
 };
 
@@ -24,6 +25,7 @@ export const TodoSection = (props: TodoSectionProps) => {
     deleteSection,
     updateSectionTitle,
     createTask,
+    updateTask,
     tasks,
     deleteTask,
   } = props;
@@ -160,7 +162,13 @@ export const TodoSection = (props: TodoSectionProps) => {
           "
       >
         {React.Children.toArray(
-          tasks.map((task) => <TaskItem task={task} deleteTask={deleteTask} />)
+          tasks.map((task) => (
+            <TodoTaskItem
+              task={task}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
+            />
+          ))
         )}
       </div>
       {/* Section footer */}

@@ -56,6 +56,15 @@ export function TodoBoard() {
     tasks.value = filteredTasks;
   }
 
+  // update tasks content by Id
+  function updateTask(id: Id, content: string) {
+    const updatedTasks = tasks.value.map((task) => {
+      if (task.id !== id) return task;
+      return { ...task, content };
+    });
+    tasks.value = updatedTasks;
+  }
+
   return (
     <>
       <div className="flex gap-4">
@@ -69,6 +78,7 @@ export function TodoBoard() {
                   updateSectionTitle={updateSectionTitle}
                   createTask={createTask}
                   deleteTask={deleteTask}
+                  updateTask={updateTask}
                   tasks={tasks.value.filter(
                     (task) => task.sectionId === section.id
                   )}
@@ -89,6 +99,7 @@ export function TodoBoard() {
               updateSectionTitle={updateSectionTitle}
               createTask={createTask}
               deleteTask={deleteTask}
+              updateTask={updateTask}
               tasks={tasks.value.filter(
                 (task) => task.sectionId === activeSection.value?.id
               )}
