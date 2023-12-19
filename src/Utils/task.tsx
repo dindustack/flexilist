@@ -4,6 +4,8 @@ import { Task } from "../types";
 const LOCAL_STORAGE_TASKS = "TODO_TASKS";
 
 export const tasks = signal<Task[]>(getTaskBoard());
+export const activeTask = signal<Task | null>(null);
+
 
 // Fetch tasks from local storage
 function getTaskBoard() {

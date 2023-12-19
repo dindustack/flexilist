@@ -1,6 +1,7 @@
 import {
   DndContext,
   DragEndEvent,
+  DragOverEvent,
   DragStartEvent,
   PointerSensor,
   useSensor,
@@ -9,6 +10,7 @@ import {
 import { TodoBoard } from "./Board";
 import { arrayMove } from "@dnd-kit/sortable";
 import { activeSection, sections } from "../../Utils/sections";
+import { activeTask, tasks } from "../../Utils/task";
 
 export const TodoContainer = () => {
   function onDragStart(event: DragStartEvent) {
@@ -16,9 +18,18 @@ export const TodoContainer = () => {
       activeSection.value = event.active.data.current.section;
       return;
     }
+
+    if (event.active.data.current?.type === "Task") {
+      activeTask.value = event.active.data.current.task;
+      return;
+    }
   }
 
   function onDragEnd(event: DragEndEvent) {
+    // When onDrayEnd ends remove dragOverlay component
+    activeSection.value = null;
+    activeTask.value = null;
+
     const { active, over } = event;
     if (!over) return;
 
@@ -43,6 +54,52 @@ export const TodoContainer = () => {
     }
 
     sections.value = draggedSection();
+  }
+
+  function onDragOver(event: DragOverEvent) {
+    const { active, over } = event;
+    if (!over) return;
+
+    const activeTaskId = active.id;
+    const overTaskId = over.id;
+
+    if (activeTaskId === overTaskId) return;
+
+    // Drop Task over another task in same section
+    const isActiveTask = active.data.current?.type === "Task";
+    const isOverTask = over.data.current?.type === "Task";
+
+    if (!isActiveTask) return;
+
+    function draggedTask() {
+      const activeIndex = tasks.value.findIndex(
+        (task) => task.id === activeTaskId
+      );
+      const overIndex = tasks.value.findIndex((task) => task.id === overTaskId);
+
+      tasks.value[activeIndex].sectionId = tasks.value[overIndex].sectionId;
+
+      return arrayMove(tasks.value, activeIndex, overIndex);
+    }
+
+    if (isActiveTask && isOverTask) {
+      tasks.value = draggedTask();
+    }
+
+    // Drop Task over another task in a different section
+    const isOverSection = over.data.current?.type === "Section";
+
+    function draggedTaskOverSections() {
+      const activeIndex = tasks.value.findIndex(
+        (task) => task.id === activeTaskId
+      );
+
+      tasks.value[activeIndex].sectionId = overTaskId;
+
+      return arrayMove(tasks.value, activeIndex, activeIndex);
+    }
+
+    if (isActiveTask && isOverSection) tasks.value = draggedTaskOverSections();
   }
 
   const sensors = useSensors(
@@ -71,6 +128,7 @@ export const TodoContainer = () => {
           sensors={sensors}
           onDragStart={onDragStart}
           onDragEnd={onDragEnd}
+          onDragOver={onDragOver}
         >
           <TodoBoard />
         </DndContext>

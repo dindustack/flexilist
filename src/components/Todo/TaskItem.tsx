@@ -1,5 +1,7 @@
+import { useSortable } from "@dnd-kit/sortable";
 import { Delete } from "../../assets/icons/Delete";
 import { Id, Task } from "../../types";
+import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 
 type Props = {
@@ -12,6 +14,27 @@ export function TodoTaskItem(props: Props) {
   const { task, deleteTask, updateTask } = props;
   const [mouseIsOver, setMouseIsOver] = useState(false);
   const [editMode, setEditMode] = useState(false);
+
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: task.id,
+    data: {
+      type: "Task",
+      task,
+    },
+    disabled: editMode,
+  });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+  };
 
   const toggleEditMode = () => {
     setEditMode((prev) => !prev);
@@ -43,6 +66,10 @@ export function TodoTaskItem(props: Props) {
   if (editMode) {
     return (
       <div
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
         className="
         relative
         bg-white
@@ -56,7 +83,7 @@ export function TodoTaskItem(props: Props) {
         border-2
         cursor-grab
         border-black
-        font-bold"
+        "
       >
         <textarea
           className="
@@ -65,7 +92,7 @@ export function TodoTaskItem(props: Props) {
           resize-none
           bg-white
           p-[10px]
-          font-bold
+          
           outline-none
           "
           autoFocus
@@ -79,8 +106,38 @@ export function TodoTaskItem(props: Props) {
     );
   }
 
+  if (isDragging) {
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="
+        relative
+        task
+        bg-[#f5f5fa] 
+        px-2.5 
+        py-1
+        h-[6.25rem] 
+        min-h-[6.25rem]
+        items-center
+        flex
+        text-left
+        rounded-xl
+        border-dashed
+        border-2
+        cursor-grab
+        border-black 
+        "
+      ></div>
+    );
+  }
+
   return (
     <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
       onClick={toggleEditMode}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -99,7 +156,7 @@ export function TodoTaskItem(props: Props) {
         border-2
         cursor-grab
         border-black 
-        font-bold"
+        "
     >
       <p
         className="

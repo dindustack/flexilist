@@ -6,7 +6,8 @@ import { Id, Section, Task } from "../../types";
 import { TodoSection } from "./Section";
 import { activeSection, sections } from "../../Utils/sections";
 import { Button } from "../Button";
-import { tasks } from "../../Utils/task";
+import { activeTask, tasks } from "../../Utils/task";
+import { TodoTaskItem } from "./TaskItem";
 
 export function TodoBoard() {
   function createNewSection() {
@@ -24,6 +25,9 @@ export function TodoBoard() {
       (section) => section.id !== id
     );
     sections.value = filteredSections;
+
+    const filteredTasks = tasks.value.filter((task) => task.sectionId !== id);
+    tasks.value = filteredTasks;
   }
 
   // Update sections title
@@ -42,7 +46,7 @@ export function TodoBoard() {
     const newTask: Task = {
       id: crypto.randomUUID(),
       sectionId,
-      content: "Item",
+      content: "Create task",
     };
 
     tasks.value = [...tasks.value, newTask];
@@ -50,9 +54,7 @@ export function TodoBoard() {
 
   // Delete tasks based on Id
   function deleteTask(id: Id) {
-    const filteredTasks = tasks.value.filter(
-      (task) => task.id !== id
-    );
+    const filteredTasks = tasks.value.filter((task) => task.id !== id);
     tasks.value = filteredTasks;
   }
 
@@ -103,6 +105,13 @@ export function TodoBoard() {
               tasks={tasks.value.filter(
                 (task) => task.sectionId === activeSection.value?.id
               )}
+            />
+          )}
+          {activeTask.value && (
+            <TodoTaskItem
+              task={activeTask.value}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
             />
           )}
         </DragOverlay>,

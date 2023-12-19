@@ -1,10 +1,10 @@
-import { useSortable } from "@dnd-kit/sortable";
+import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Delete } from "../../assets/icons/Delete";
 import { Section, Id, Task } from "../../types";
 import Input from "./Input";
 import { Button } from "../Button";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { TodoTaskItem } from "./TaskItem";
 
 type TodoSectionProps = {
@@ -19,7 +19,6 @@ type TodoSectionProps = {
 };
 
 export const TodoSection = (props: TodoSectionProps) => {
-  const [editMode, setEditMode] = useState(false);
   const {
     section,
     deleteSection,
@@ -29,6 +28,12 @@ export const TodoSection = (props: TodoSectionProps) => {
     tasks,
     deleteTask,
   } = props;
+
+  const [editMode, setEditMode] = useState(false);
+
+  const tasksIds = useMemo(() => {
+    return tasks.map((task) => task.id);
+  }, [tasks]);
 
   const handleEditMode = () => {
     setEditMode(true);
@@ -161,15 +166,17 @@ export const TodoSection = (props: TodoSectionProps) => {
           overflow-y-auto
           "
       >
-        {React.Children.toArray(
-          tasks.map((task) => (
-            <TodoTaskItem
-              task={task}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-            />
-          ))
-        )}
+        <SortableContext items={tasksIds}>
+          {React.Children.toArray(
+            tasks.map((task) => (
+              <TodoTaskItem
+                task={task}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+              />
+            ))
+          )}
+        </SortableContext>
       </div>
       {/* Section footer */}
       <Button
