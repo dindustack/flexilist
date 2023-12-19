@@ -121,6 +121,7 @@ export function TodoTaskItem(props: Props) {
           className="
           stroke-white
           absolute
+          z-10
           right-4
           top-1/2
           -translate-y-1/2
