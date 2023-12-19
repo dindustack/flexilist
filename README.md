@@ -47,14 +47,11 @@ Follow these steps to set up and run the Drag-and-Drop Todo Board App on your lo
 ## Usage
 
 - **Creating a New Section:**
-  - Click the "New Board" button to add a new section to your Todo board.
+  - Click the "Add New Board" button to add a new section to your Todo board.
 
 - **Managing Tasks:**
-  - Drag tasks between sections to update their status or priority.
+  - Drag tasks between sections.
   - Create tasks within each section by clicking the "Add New Task" button.
-
-- **Customization:**
-  - Tailor the Todo board to your needs by organizing tasks in different sections based on projects or categories.
 
 ## Technologies Used
 

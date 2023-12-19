@@ -90,7 +90,7 @@ export function TodoBoard() {
           </SortableContext>
         </div>
 
-        <Button icon onClick={createNewSection}>New Board</Button>
+        <Button icon onClick={createNewSection}>Add New Board</Button>
       </div>
       {createPortal(
         <DragOverlay>
