@@ -1,12 +1,28 @@
+import { signal } from "@preact/signals-react";
+import { Delete } from "../../assets/icons/Delete";
 import { Task } from "../../types";
+import { useState } from "react";
 
 type Props = {
   task: Task;
 };
+
 export function TaskItem({ task }: Props) {
+  const [mouseIsOver, setMouseIsOver] = useState(false);
+  const handleMouseLeave = () => {
+    setMouseIsOver(false);
+  };
+
+  const handleMouseEnter = () => {
+    setMouseIsOver(true);
+  };
+
   return (
     <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="
+        relative
         bg-white 
         p-2.5 
         h-[6.25rem] 
@@ -20,7 +36,22 @@ export function TaskItem({ task }: Props) {
         border-black 
         font-bold"
     >
-      <h2 className="text-lg">{task.content}</h2>
+      <span className="inline-block text-lg">{task.content}</span>
+      {mouseIsOver && (
+        <button
+          className="
+          stroke-white
+          absolute
+          right-4
+          top-1/2
+          -translate-y-1/2
+          "
+          role="button"
+          aria-label="Click to delete task"
+        >
+          <Delete />
+        </button>
+      )}
     </div>
   );
 }

@@ -5,34 +5,35 @@ import { Section, Id, Task } from "../../types";
 import { signal } from "@preact/signals-react";
 import Input from "./Input";
 import { Button } from "../Button";
-import React from "react";
+import React, { useState } from "react";
 import { TaskItem } from "./TaskItem";
 
 type TodoSectionProps = {
   section: Section;
   deleteSection: (id: Id) => void;
   updateSectionTitle: (id: Id, title: string) => void;
+
   createTask: (sectionId: Id) => void;
   tasks: Task[];
 };
 
-const editMode = signal<boolean>(false);
 
 export const TodoSection = (props: TodoSectionProps) => {
+  const [editMode, setEditMode] = useState(false);
   const { section, deleteSection, updateSectionTitle, createTask, tasks } =
     props;
 
   const handleEditMode = () => {
-    editMode.value = true;
+    setEditMode(true);
   };
 
   const falseEditMode = () => {
-    editMode.value = false;
+    setEditMode(false);
   };
 
   const handleEnterClick = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== "Enter") return;
-    editMode.value = false;
+    setEditMode(false);
   };
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,17 +122,17 @@ export const TodoSection = (props: TodoSectionProps) => {
       >
         <span
           className={`inline-block ${
-            !editMode.value && `bg-[#514ffe]`
+            !editMode && `bg-[#514ffe]`
           } text-white rounded-lg px-4 py-2 text-lg`}
         >
-          {!editMode.value && section.title}
-          {editMode.value && (
+          {!editMode && section.title}
+          {editMode && (
             <Input
               value={section.title}
               onInput={handleTitleChange}
               placeholder="Type..."
               onBlur={() => {
-                falseEditMode;
+                falseEditMode();
               }}
               onKeyDown={handleEnterClick}
             />
@@ -151,7 +152,6 @@ export const TodoSection = (props: TodoSectionProps) => {
           p-2 
           overflow-x-hidden 
           overflow-y-auto
-          
           "
       >
         {React.Children.toArray(tasks.map((task) => <TaskItem task={task} />))}
