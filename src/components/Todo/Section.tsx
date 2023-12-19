@@ -13,14 +13,20 @@ type TodoSectionProps = {
   updateSectionTitle: (id: Id, title: string) => void;
 
   createTask: (sectionId: Id) => void;
+  deleteTask: (id: Id) => void;
   tasks: Task[];
 };
 
-
 export const TodoSection = (props: TodoSectionProps) => {
   const [editMode, setEditMode] = useState(false);
-  const { section, deleteSection, updateSectionTitle, createTask, tasks } =
-    props;
+  const {
+    section,
+    deleteSection,
+    updateSectionTitle,
+    createTask,
+    tasks,
+    deleteTask,
+  } = props;
 
   const handleEditMode = () => {
     setEditMode(true);
@@ -153,7 +159,9 @@ export const TodoSection = (props: TodoSectionProps) => {
           overflow-y-auto
           "
       >
-        {React.Children.toArray(tasks.map((task) => <TaskItem task={task} />))}
+        {React.Children.toArray(
+          tasks.map((task) => <TaskItem task={task} deleteTask={deleteTask} />)
+        )}
       </div>
       {/* Section footer */}
       <Button

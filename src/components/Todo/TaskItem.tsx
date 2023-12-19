@@ -1,12 +1,14 @@
 import { Delete } from "../../assets/icons/Delete";
-import { Task } from "../../types";
+import { Id, Task } from "../../types";
 import { useState } from "react";
 
 type Props = {
   task: Task;
+  deleteTask: (id: Id) => void;
 };
 
-export function TaskItem({ task }: Props) {
+export function TaskItem(props: Props) {
+  const { task, deleteTask } = props;
   const [mouseIsOver, setMouseIsOver] = useState(false);
   const handleMouseLeave = () => {
     setMouseIsOver(false);
@@ -38,6 +40,9 @@ export function TaskItem({ task }: Props) {
       <span className="inline-block text-lg">{task.content}</span>
       {mouseIsOver && (
         <button
+          onClick={() => {
+            deleteTask(task.id);
+          }}
           className="
           stroke-white
           absolute
