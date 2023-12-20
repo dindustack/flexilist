@@ -102,9 +102,10 @@ export const TodoSection = (props: TodoSectionProps) => {
       style={style}
       className="
         w-[21.875rem]
-        h-[34.375rem]
+        h-[29.375rem]
+        md:h-[34.375rem]
         bg-white
-        max-h-[550px]
+        max-h-[34.375rem]
         rounded-md
         flex
         flex-col 
