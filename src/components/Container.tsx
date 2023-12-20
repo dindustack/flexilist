@@ -12,7 +12,7 @@ export const Container = () => {
       <div id="drawer"></div>
       <main className="pt-20 pb-20">
         <TodoContainer />
-        <div className="fixed bottom-24 right-8">
+        <div className="fixed bottom-20 md:bottom-24 right-8">
           <DrawerContainer />
         </div>
       </main>
