@@ -33,14 +33,36 @@ export function Drawer({ active, setActive, children }: Props) {
         visibility: isVisible ? "visible" : "hidden",
       }}
       onClick={closeDrawer}
-      className="fixed left-0 top-0 z-50 flex h-[100dvh] w-screen items-start overflow-y-auto justify-start bg-gray-500/50 transition-all duration-300"
+      className="
+        fixed 
+        left-0 
+        top-0 
+        z-50 
+        flex 
+        h-[100dvh] 
+        w-screen 
+        items-start 
+        overflow-y-hidden 
+        justify-start 
+        bg-gray-500/50 
+        transition-all 
+        duration-300"
     >
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
           transform: `translateX(${isVisible ? "0" : "-300px"})`,
         }}
-        className="z-10 h-full w-[300px] border-2 border-black bg-white font-bold transition-transform duration-300"
+        className="
+          h-full 
+          overflow-y-auto 
+          w-[300px] 
+          border-2 
+          border-black 
+          bg-white
+          font-bold 
+          transition-transform 
+          duration-300"
       >
         {children}
       </div>
