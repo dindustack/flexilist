@@ -49,13 +49,7 @@ export function TodoTaskItem(props: Props) {
     setMouseIsOver(true);
   };
 
-  // const handleEnterClick = (
-  //   event: React.KeyboardEvent<HTMLTextAreaElement>
-  // ) => {
-  //   if (event.key !== "Enter" && event.shiftKey) {
-  //     toggleEditMode();
-  //   }
-  // };
+  
 
   const handleContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -98,8 +92,7 @@ export function TodoTaskItem(props: Props) {
           placeholder="Type..."
           value={task.content}
           onBlur={toggleEditMode}
-          // onKeyDown={handleEnterClick}
-          onInput={handleContentChange}
+          onChange={handleContentChange}
         ></textarea>
       </div>
     );

@@ -142,7 +142,7 @@ export const TodoSection = (props: TodoSectionProps) => {
           {editMode && (
             <Input
               value={section.title}
-              onInput={handleTitleChange}
+              onChange={handleTitleChange}
               placeholder="Type..."
               onBlur={() => {
                 falseEditMode();
