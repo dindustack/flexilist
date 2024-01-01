@@ -3,17 +3,18 @@ import { PlusIcon } from "../assets/icons/PlusIcon";
 type ButtonProps = {
   children: React.ReactNode;
   icon?: boolean;
+  shadow?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export function Button(props: ButtonProps) {
-  const { children, onClick, icon } = props;
+  const { children, shadow, onClick, icon } = props;
   return (
     <button
       role="button"
       aria-label="Click to perform an action"
       onClick={onClick}
-      className="
+      className={`
         flex  
         h-[60px]
         w-[345px]
@@ -28,10 +29,12 @@ export function Button(props: ButtonProps) {
         py-3 
         gap-2
         font-bold 
-        shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+        ${shadow && 
+        `shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
         transition-all hover:translate-x-[3px] 
         hover:translate-y-[3px] 
-        hover:shadow-none"
+        hover:shadow-none`
+        }`}
     >
       {icon && <PlusIcon />}
       {children}

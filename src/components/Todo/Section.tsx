@@ -6,6 +6,7 @@ import Input from "./Input";
 import { Button } from "../Button";
 import React, { useMemo, useState } from "react";
 import { TodoTaskItem } from "./TaskItem";
+import { PlusIcon } from "../../assets/icons/PlusIcon";
 
 type TodoSectionProps = {
   section: Section;
@@ -180,14 +181,31 @@ export const TodoSection = (props: TodoSectionProps) => {
         </SortableContext>
       </div>
       {/* Section footer */}
-      <Button
-        icon
+
+      <button
+        role="button"
+        aria-label="Click to perform an action"
         onClick={() => {
           handleCreateTask(section.id);
         }}
+        className="
+        flex  
+        h-[60px]
+        w-full
+        cursor-pointer 
+        items-center 
+        border-t-2 
+        border-black 
+        bg-[#e9affc] 
+        px-10 
+        py-3 
+        gap-2
+        font-bold 
+        "
       >
+        <PlusIcon />
         Add New Task
-      </Button>
+      </button>
     </div>
   );
 };

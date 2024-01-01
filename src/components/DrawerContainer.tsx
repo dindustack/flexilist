@@ -18,7 +18,7 @@ export default function DrawerContainer() {
 
   return (
     <>
-      <Button
+      <Button shadow
         onClick={() => {
           setIsDrawerActive(true);
         }}
