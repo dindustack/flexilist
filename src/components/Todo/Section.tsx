@@ -3,7 +3,6 @@ import { CSS } from "@dnd-kit/utilities";
 import { Delete } from "../../assets/icons/Delete";
 import { Section, Id, Task } from "../../types";
 import Input from "./Input";
-import { Button } from "../Button";
 import React, { useMemo, useState } from "react";
 import { TodoTaskItem } from "./TaskItem";
 import { PlusIcon } from "../../assets/icons/PlusIcon";
